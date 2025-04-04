@@ -116,10 +116,11 @@ El tótem con flechas simboliza una **tabla de enrutamiento** (*routing table*),
 
 - **Funcionamiento**:  
   Cuando un paquete llega al router, este:  
-  1. Consulta la tabla de enrutamiento.  
-  2. Compara la dirección IP destino con las entradas de la tabla.  
-  3. Elige la ruta más eficiente (menor métrica o coincidencia más específica).  
-  4. Reenvía el paquete por el puerto/gateway correspondiente.  
+  - Consulta la tabla de enrutamiento.  
+  - Compara la dirección IP destino con las entradas de la tabla.  
+  - Elige la ruta más eficiente (menor métrica o coincidencia más específica).  
+  - Reenvía el paquete por el puerto/gateway correspondiente.  
+
 
 ---
 
