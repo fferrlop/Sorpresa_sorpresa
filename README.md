@@ -55,3 +55,50 @@ Las 4 subredes serían:
 
 **Conclusión**:  
 Los antiguos lograron dividir su "reino digital" en 4 subredes iguales usando una máscara /26, asignando 62 direcciones útiles a cada gremio. Esto resolvía la demanda de equidad y organización descrita en la losa. 🔢
+
+
+
+
+### **Respuesta: La Encrucijada de las Rutas**
+
+#### **1. Concepto Moderno Representado por el Tótem**  
+El tótem con flechas simboliza una **tabla de enrutamiento** (*routing table*), un componente clave en los routers actuales que decide cómo dirigir el tráfico de datos hacia su destino.
+
+---
+
+#### **2. ¿Qué es una Tabla de Enrutamiento?**  
+- **Definición**: Es una base de datos almacenada en un router que contiene las "rutas" hacia diferentes redes. Cada entrada indica:  
+  - **Destino**: Dirección IP o red de destino.  
+  - **Máscara de subred**: Define el alcance de la red destino.  
+  - **Gateway**: Dirección del próximo salto (router) hacia el destino.  
+  - **Interfaz**: Puerto físico por donde enviar el paquete.  
+  - **Métrica**: "Costo" de la ruta (ej: distancia, retraso).  
+
+- **Funcionamiento**:  
+  Cuando un paquete llega al router, este:  
+  1. Consulta la tabla de enrutamiento.  
+  2. Compara la dirección IP destino con las entradas de la tabla.  
+  3. Elige la ruta más eficiente (menor métrica o coincidencia más específica).  
+  4. Reenvía el paquete por el puerto/gateway correspondiente.  
+
+---
+
+#### **3. Flechas Talladas vs. Flechas Móviles**  
+
+| **Característica**       | **Flechas Talladas en Piedra**         | **Flechas Móviles**                   |  
+|--------------------------|---------------------------------------|---------------------------------------|  
+| **Tipo de Enrutamiento** | **Enrutamiento Estático**             | **Enrutamiento Dinámico**             |  
+| **Definición**           | Rutas configuradas manualmente.       | Rutas aprendidas automáticamente mediante protocolos (OSPF, BGP). |  
+| **Flexibilidad**         | Inmutables (requieren intervención humana para cambiar). | Se adaptan a cambios en la red (ej: caída de enlaces). |  
+| **Ejemplo**              | Una ruta fija a una red corporativa.  | Rutas en Internet que se ajustan según congestión o fallos. |  
+| **Ventajas**             | - Bajo consumo de recursos. <br> - Mayor seguridad. | - Escalabilidad. <br> - Autonomía.    |  
+| **Desventajas**          | - No se adapta a cambios. <br> - Inviable en redes grandes. | - Mayor complejidad. <br> - Consumo de ancho de banda para actualizaciones. |  
+
+---
+
+#### **4. Conclusión**  
+- **Tótem = Tabla de Enrutamiento**: Las flechas son las rutas almacenadas en el router.  
+- **Flechas Talladas**: Rutas estáticas, ideales para redes pequeñas o rutas críticas que no cambian.  
+- **Flechas Móviles**: Rutas dinámicas, esenciales en redes grandes como Internet, donde la topología es cambiante.  
+
+Este sistema garantiza que los "mensajes" (paquetes de datos) siempre encuentren el mejor camino hacia su destino, ya sea fijo o adaptable. 🌐  
