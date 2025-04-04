@@ -156,10 +156,11 @@ La leyenda representa **NAT (Network Address Translation)** o **Traducción de D
   Es un protocolo que permite que múltiples dispositivos en una red privada compartan una **única dirección IP pública** al comunicarse con redes externas (como Internet).  
 
 - **¿Cómo funciona?**  
-  1. **Direcciones privadas**: Los dispositivos internos usan IPs privadas (ej: `192.168.1.2`, `10.0.0.3`), que no son enrutables en Internet.  
-  2. **Traducción**: Cuando un dispositivo envía datos al exterior, el router (el "guardián") reemplaza la IP privada por su propia IP pública.  
-  3. **Registro**: El router guarda en una tabla la correspondencia entre la IP:puerto interno y la IP:puerto externo.  
-  4. **Respuesta**: Al recibir una respuesta, el router consulta su tabla y reenvía los datos al dispositivo interno correcto.  
+  - **Direcciones privadas**: Los dispositivos internos usan IPs privadas (ej: `192.168.1.2`, `10.0.0.3`), que no son enrutables en Internet.  
+  - **Traducción**: Cuando un dispositivo envía datos al exterior, el router (el "guardián") reemplaza la IP privada por su propia IP pública.  
+  - **Registro**: El router guarda en una tabla la correspondencia entre la IP:puerto interno y la IP:puerto externo.  
+  - **Respuesta**: Al recibir una respuesta, el router consulta su tabla y reenvía los datos al dispositivo interno correcto.  
+
 
 ---
 
