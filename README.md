@@ -55,7 +55,8 @@
 ---
 
 ### **Resultado**
- 
+ ![image](https://github.com/user-attachments/assets/3a12c1d5-faed-4693-a6b6-0b2617b10d37)
+
 ---
 
 ## Ejercicio 2: La Ciudad de las Redes Aisladas
