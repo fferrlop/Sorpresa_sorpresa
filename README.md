@@ -55,10 +55,7 @@
 ---
 
 ### **Resultado**
-- Paquetes enviados exitosamente:  
-  - PC_A_1 → PC_B_1  
-  - PC_A_2 → PC_B_2  
-
+ 
 ---
 
 ## Ejercicio 2: La Ciudad de las Redes Aisladas
@@ -103,5 +100,4 @@
 ---
 
 ### **Resultado**
-- Conexiones exitosas entre dispositivos de ambas VLANs.  
-- Pruebas de envío de paquetes confirmadas como funcionales.  
+ 
