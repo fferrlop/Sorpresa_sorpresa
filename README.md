@@ -48,12 +48,12 @@
 
 ### **UDP (Mensajero Veloz)**  
 **Ventajas**:  
-- ⚡ Baja latencia: Ideal para tiempo real (streaming, VoIP).  
-- ⚡ Eficiente en ancho de banda.  
+- ✅ Baja latencia: Ideal para tiempo real (streaming, VoIP).  
+- ✅ Eficiente en ancho de banda.  
 
 **Desventajas**:  
-- 🚫 Sin garantía de entrega o orden de paquetes.  
-- 🚫 Riesgo de datos incompletos/desordenados.  
+- ❌ Sin garantía de entrega o orden de paquetes.  
+- ❌ Riesgo de datos incompletos/desordenados.  
 
 ---
 
@@ -65,17 +65,7 @@
 
 ## Ejercicio 3
 
-#### **1. Máscara de Subred Utilizada**  
-La máscara de subred que habrían usado los antiguos es **255.255.255.192** (en notación CIDR: **/26**).
-
----
-
-#### **2. Direcciones de Host Utilizables por Subred**  
-Cada subred tendría **62 direcciones de host utilizables**.
-
----
-
-#### **3. Explicación Detallada del Cálculo**  
+#### ** Explicación Detallada del Cálculo**  
 
 **Paso 1: Determinar los bits necesarios para 4 subredes**  
 - Para dividir la red en **4 subredes**, se necesitan: log2(4) = 2 bits prestados de la parte de host.
@@ -98,9 +88,6 @@ Las 4 subredes serían:
 | `192.168.50.128/26`  | `192.168.50.129` – `192.168.50.190` |
 | `192.168.50.192/26`  | `192.168.50.193` – `192.168.50.254` |
 
----
-
-## Ejercicio 4
 
 | **Aspecto**               | **Detalle**                              |
 |---------------------------|------------------------------------------|
@@ -111,6 +98,7 @@ Las 4 subredes serían:
 
 **Conclusión**:  
 Los antiguos lograron dividir su "reino digital" en 4 subredes iguales usando una máscara `/26`, asignando **62 direcciones útiles** a cada gremio.
+
 ### **EJERCICIO 4 **
 
 #### **1. Concepto Moderno Representado por el Tótem**  
@@ -197,111 +185,3 @@ El Guardián de la Máscara es una metáfora perfecta de **NAT**:
 - **Máscara única**: Todos los dispositivos parecen tener la misma IP pública.  
 - **Traducción**: El router actúa como intermediario, recordando "quién es quién" en la red interna.  
 - **Ventajas**: Ahorro de IPs y protección de la red interna, pilares clave en redes domésticas y empresariales.
-
-
-# Parte 2
-
-## Ejercicio 1
-
-### **Topología**
-- **Ciudad A**:  
-  - R_A (Router 1841)  
-  - SW_A (Switch 2960)  
-  - AP_A (Access Point)  
-  - PC_A_1 y PC_A_2  
-  - Conexiones: Cobre (física) + WiFi  
-
-- **Ciudad B**:  
-  - R_B (Router 1841)  
-  - SW_B (Switch 2960)  
-  - AP_B (Access Point)  
-  - PC_B_1 y PC_B_2  
-  - Conexiones: Cobre (física) + WiFi  
-
-- **Red WAN**:  
-  - Cloud (simulación WAN con Frame-Relay)  
-  - Enlaces seriales DTE  
-
----
-
-### **Configuración de Red**
-
-#### **Conexiones WAN**
-| Dispositivo | Interfaz        | IP              | Máscara            | DLCI  |
-|-------------|-----------------|------------------|--------------------|-------|
-| R_A         | Serial 0/0/0    | 192.168.30.1     | 255.255.255.252    | 101   |
-| R_B         | Serial 0/0/0    | 192.168.30.2     | 255.255.255.252    | 102   |
-| **Cloud**   | Serial5 ↔ Serial6 | -                | -                  | -     |
-
-- **Frame-Relay**: Mapeo Serial5 a Serial6 en la nube.
-
-#### **Conexiones LAN**
-| Ciudad | Red           | Máscara          | SSID        | Password     |
-|--------|---------------|------------------|-------------|--------------|
-| A      | 192.168.10.0  | 255.255.255.0    | LaMasia     | ViscaBarsa   |
-| B      | 192.168.20.0  | 255.255.255.0    | LaFabrica   | AlaMadrid    |
-
----
-
-### **Tabla de Dispositivos**
-| Dispositivo | Interfaz          | IP              | Máscara            |
-|-------------|-------------------|------------------|--------------------|
-| R_A         | FastEthernet0/0   | 192.168.10.1     | 255.255.255.0      |
-| R_A         | Serial0/0/0       | 192.168.30.1     | 255.255.255.252    |
-| R_B         | FastEthernet0/0   | 192.168.20.1     | 255.255.255.0      |
-| R_B         | Serial0/0/0       | 192.168.30.2     | 255.255.255.252    |
-
-#### **Rutas Estáticas**
-- **R_A**: `192.168.20.0/24` vía `192.168.30.2`  
-- **R_B**: `192.168.10.0/24` vía `192.168.30.1`  
-
----
-
-### **Resultado**
- ![image](https://github.com/user-attachments/assets/f495ce45-4821-480c-ac86-149d10acdb7c)
-
----
-
-## Ejercicio 2
-
-### **Topología**
-- **Dispositivos Principales**:  
-  - Router "Gran_Torre_Central" (1941)  
-  - Switch (2960)  
-  - **Gremio de Arquitectos**:  
-    - AP  
-    - PC_A_1 (WiFi) y PC_A_2 (Cable)  
-  - **Gremio de Escribas**:  
-    - AP  
-    - PC_E_1 (WiFi), PC_E_2 (Cable), Printer_E (WiFi)  
-
----
-
-### **Configuración de Red**
-
-#### **VLANs en el Switch**
-| VLAN  | Nombre         | Puertos (Modo Access)    |
-|-------|----------------|--------------------------|
-| 10    | Arquitectos    | Fa0/1 – Fa0/12           |
-| 20    | Escribas       | Fa0/13 – Fa0/24          |
-| -     | **Trunk**      | Gig0/1 (conexión al router) |
-
-#### **Router "Gran Torre Central"**
-| Interfaz          | IP              | Función                   |
-|-------------------|------------------|---------------------------|
-| Gig0/0.10         | 192.168.10.1     | Subinterfaz para VLAN 10  |
-| Gig0/0.20         | 192.168.20.1     | Subinterfaz para VLAN 20  |
-
-#### **Dispositivos Finales**
-| Dispositivo   | Interfaz       | IP              |
-|---------------|----------------|------------------|
-| PC_A_1        | Wireless       | 192.168.10.2    |
-| PC_A_2        | FastEthernet   | 192.168.10.3    |
-| PC_E_1        | Wireless       | 192.168.20.2    |
-| PC_E_2        | FastEthernet   | 192.168.20.3    |
-| Printer_E     | Wireless       | 192.168.20.4    |
-
----
-
-### **Resultado**
- ![image](https://github.com/user-attachments/assets/578831e4-d372-434a-91ee-5263ba906abc)
