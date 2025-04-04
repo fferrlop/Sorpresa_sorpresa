@@ -1,4 +1,4 @@
-## Ejercicio 1: Modelo OSI y su relación con TCP/IP
+## Ejercicio 1
 
 ### **Modelo OSI (7 Capas)**
 
@@ -31,7 +31,7 @@
 
 ---
 
-## Ejercicio 2: Comparativa TCP vs UDP
+## Ejercicio 2
 
 ### **TCP (Mensajero Confiable)**  
 **Ventajas**:  
@@ -61,7 +61,7 @@
 | TCP           | Datos críticos, precisión       | Aplicaciones sensibles a la latencia |
 | UDP           | Transmisiones rápidas en tiempo real | Datos que requieren integridad absoluta |
 
-### **EJERCICIO 3 **
+## Ejercicio 3
 
 #### **1. Máscara de Subred Utilizada**  
 La máscara de subred que habrían usado los antiguos es **255.255.255.192** (en notación CIDR: **/26**).
@@ -98,7 +98,8 @@ Las 4 subredes serían:
 
 ---
 
-#### **4. Resumen Final**  
+## Ejercicio 4
+
 | **Aspecto**               | **Detalle**                              |
 |---------------------------|------------------------------------------|
 | Máscara de subred         | `255.255.255.192` (/26)                  |
@@ -152,7 +153,7 @@ El tótem con flechas simboliza una **tabla de enrutamiento** (*routing table*),
 
 Este sistema garantiza que los "mensajes" (paquetes de datos) siempre encuentren el mejor camino hacia su destino, ya sea fijo o adaptable.
 
-### **EJERCICIO 5 **
+## Ejercicio 5
 
 #### **1. Técnica de Redes Moderna**  
 La leyenda representa **NAT (Network Address Translation)** o **Traducción de Direcciones de Red**.
