@@ -1,56 +1,20 @@
-## Paso 4: Capa de Transporte – Selección y Cálculo de Ventana
-
-### 🔹 Decisión de Protocolos
-
-En la red diseñada, se seleccionan los protocolos de la capa de transporte en función del tipo de servicio requerido:
-
-- *TCP* se utiliza para la *transferencia segura de archivos* (por ejemplo, mediante servicios como *FTP o SFTP*) debido a su control de flujo, fiabilidad y retransmisión en caso de pérdida.
-- *UDP* se utiliza para el *streaming multimedia* (como conferencias en vídeo o material audiovisual), ya que permite una transmisión más rápida al no requerir confirmación de entrega, ideal para comunicaciones en tiempo real.
-
----
-
-### 🔹 Cálculo de la Ventana de Transmisión
-
-Para mejorar el rendimiento de TCP, es importante dimensionar correctamente la *ventana de transmisión*. Esta ventana indica cuánto puede enviar el emisor antes de necesitar una confirmación del receptor.
-
-El tamaño óptimo de la ventana (en bits) se calcula con la fórmula:
+## Paso 5: Capa de Aplicación – Servicios y Multiplexación
 
 
-Ventana = RTT × Ancho de banda
+### Streaming Multimedia
 
+En un entorno académico con transmisión de contenido multimedia, como videoconferencias o clases grabadas, es fundamental garantizar una experiencia fluida para todos los usuarios, incluso si cuentan con diferentes calidades de conexión. Para ello, una técnica adecuada es el *Adaptive HTTP Streaming, concretamente **DASH (Dynamic Adaptive Streaming over HTTP)*.
 
-> Donde:
-> - *RTT (Round Trip Time)*: Tiempo total de ida y vuelta de un paquete.
-> - *Ancho de banda*: Capacidad del enlace en bits por segundo.
+DASH divide el contenido multimedia en pequeños segmentos de distintos niveles de calidad. El cliente selecciona y descarga dinámicamente la versión más adecuada en función del *ancho de banda disponible en tiempo real*. Si la conexión es estable, se reproducen segmentos de mayor calidad; si hay congestión o caídas, se cambia automáticamente a una calidad inferior para evitar interrupciones.
+
+Este enfoque optimiza el rendimiento de la red, mejora la experiencia del usuario y se adapta bien a entornos heterogéneos como el planteado en este proyecto, donde coexisten conexiones cableadas y WiFi con distintos niveles de velocidad y estabilidad.
 
 ---
 
-### 🔸 Ejemplo de Cálculo:
+### Diseño de Servicios
 
-Supongamos un *RTT de 50 ms (0.05 s)* y un *ancho de banda de 10 Mbps*:
+En un diseño de red como el del presente proyecto, se contempla la *implementación de servicios FTP/SFTP* para permitir la transferencia segura de archivos grandes entre nodos, y *servicios HTTP/HTTPS* para ofrecer contenido multimedia como conferencias grabadas o materiales interactivos.
 
+La *resolución de nombres DNS* cumple un papel clave, permitiendo que los usuarios accedan a recursos mediante nombres de dominio en lugar de direcciones IPv6, lo cual mejora la usabilidad del sistema. Esta resolución es gestionada por un servidor DNS, que responde a las consultas de los clientes indicando la dirección correspondiente al nombre solicitado.
 
-Ventana = 0.05 s × 10 × 10^6 bps = 500,000 bits
-
-
-Convertido a bytes:
-
-
-500,000 bits ÷ 8 = 62,500 bytes
-
-
-Es decir, la ventana óptima sería de *62.5 KB*.
-
----
-
-### 🔹 Relación con MSS (Maximum Segment Size)
-
-Dado un *MSS típico de 1460 bytes*, se puede calcular cuántos segmentos pueden transmitirse antes de requerir una ACK:
-
-
-62,500 bytes ÷ 1460 ≈ 42.8 segmentos
-
-
-Esto permite ajustar el tamaño de la ventana TCP y prever el rendimiento de la red para transferencias de archivos, especialmente en los enlaces críticos entre routers.
-
----
+Para soportar *múltiples solicitudes simultáneas, se aplican técnicas de **multiplexación*, que permiten que un único servidor atienda varios clientes al mismo tiempo. Esto se logra utilizando diferentes puertos o identificadores de sesión, garantizando una comunicación eficiente y sin interferencias entre usuarios.
