@@ -1,34 +1,56 @@
-## Paso 1: Calcular el MSS
+## Paso 4: Capa de Transporte – Selección y Cálculo de Ventana
 
-```
-MSS = MTU - Encabezados IP/TCP
-MSS = 1500 bytes - 40 bytes
-MSS = 1460 bytes
-```
+### 🔹 Decisión de Protocolos
 
----
+En la red diseñada, se seleccionan los protocolos de la capa de transporte en función del tipo de servicio requerido:
 
-## Paso 2: Calcular el Bandwidth-Delay Product (BDP)
-
-```
-BDP (bits) = Ancho de Banda × RTT
-BDP (bits) = 1,000,000,000 bits/s × 0.012 s
-BDP (bits) = 12,000,000 bits
-
-BDP (bytes) = BDP (bits) ÷ 8
-BDP (bytes) = 12,000,000 bits ÷ 8
-BDP (bytes) = 1,500,000 bytes
-```
+- *TCP* se utiliza para la *transferencia segura de archivos* (por ejemplo, mediante servicios como *FTP o SFTP*) debido a su control de flujo, fiabilidad y retransmisión en caso de pérdida.
+- *UDP* se utiliza para el *streaming multimedia* (como conferencias en vídeo o material audiovisual), ya que permite una transmisión más rápida al no requerir confirmación de entrega, ideal para comunicaciones en tiempo real.
 
 ---
 
-## Paso 3: Determinar el Tamaño de la Ventana TCP
+### 🔹 Cálculo de la Ventana de Transmisión
 
-```
-Ventana Óptima (bytes) = BDP
-Ventana Óptima (bytes) = 1,500,000 bytes
+Para mejorar el rendimiento de TCP, es importante dimensionar correctamente la *ventana de transmisión*. Esta ventana indica cuánto puede enviar el emisor antes de necesitar una confirmación del receptor.
 
-Ventana Óptima (segmentos) = BDP ÷ MSS
-Ventana Óptima (segmentos) = 1,500,000 bytes ÷ 1460 bytes/segmento
-Ventana Óptima (segmentos) ≈ 1027 segmentos
-```
+El tamaño óptimo de la ventana (en bits) se calcula con la fórmula:
+
+
+Ventana = RTT × Ancho de banda
+
+
+> Donde:
+> - *RTT (Round Trip Time)*: Tiempo total de ida y vuelta de un paquete.
+> - *Ancho de banda*: Capacidad del enlace en bits por segundo.
+
+---
+
+### 🔸 Ejemplo de Cálculo:
+
+Supongamos un *RTT de 50 ms (0.05 s)* y un *ancho de banda de 10 Mbps*:
+
+
+Ventana = 0.05 s × 10 × 10^6 bps = 500,000 bits
+
+
+Convertido a bytes:
+
+
+500,000 bits ÷ 8 = 62,500 bytes
+
+
+Es decir, la ventana óptima sería de *62.5 KB*.
+
+---
+
+### 🔹 Relación con MSS (Maximum Segment Size)
+
+Dado un *MSS típico de 1460 bytes*, se puede calcular cuántos segmentos pueden transmitirse antes de requerir una ACK:
+
+
+62,500 bytes ÷ 1460 ≈ 42.8 segmentos
+
+
+Esto permite ajustar el tamaño de la ventana TCP y prever el rendimiento de la red para transferencias de archivos, especialmente en los enlaces críticos entre routers.
+
+---
