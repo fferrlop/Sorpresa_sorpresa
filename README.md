@@ -18,3 +18,25 @@ En un diseño de red como el del presente proyecto, se contempla la *implementac
 La *resolución de nombres DNS* cumple un papel clave, permitiendo que los usuarios accedan a recursos mediante nombres de dominio en lugar de direcciones IPv6, lo cual mejora la usabilidad del sistema. Esta resolución es gestionada por un servidor DNS, que responde a las consultas de los clientes indicando la dirección correspondiente al nombre solicitado.
 
 Para soportar *múltiples solicitudes simultáneas, se aplican técnicas de **multiplexación*, que permiten que un único servidor atienda varios clientes al mismo tiempo. Esto se logra utilizando diferentes puertos o identificadores de sesión, garantizando una comunicación eficiente y sin interferencias entre usuarios.
+
+# Estimación de Costes del Proyecto de Red (Actualizada)
+
+| Elemento                             |   Cantidad |   Precio Unitario (€) |   Subtotal (€) |
+|:-------------------------------------|-----------:|----------------------:|---------------:|
+| Routers Cisco 2911                   |          5 |                 850   |           4250 |
+| Switches Cisco Catalyst 2960 (PT)    |          5 |                 400   |           2000 |
+| Switch Central PT (Core)             |          1 |                 400   |            400 |
+| Access Points                        |          3 |                 250   |            750 |
+| PCs / Laptops / Dispositivos Cliente |         10 |                 500   |           5000 |
+| Servidores (DNS, Web, FTP)           |          3 |                 900   |           2700 |
+| ASA 5506-X (Firewall)                |          1 |                 800   |            800 |
+| Cables de fibra multimodo (LC-LC)    |        200 |                   0.8 |            160 |
+| Cables de cobre Cat6                 |       2500 |                   0.4 |           1000 |
+| Rack y montaje                       |          1 |                1000   |           1000 |
+| Home Gateway IoT                     |          5 |                 150   |            750 |
+| Detectores de Humo IoT               |          5 |                  50   |            250 |
+| Cámaras de Videovigilancia IoT       |          3 |                 180   |            540 |
+| Altavoces Inteligentes IoT           |          4 |                 120   |            480 |
+| Servidor de Correo Electrónico       |          1 |                 900   |            900 |
+
+*Coste total estimado: 23000.00 €*
