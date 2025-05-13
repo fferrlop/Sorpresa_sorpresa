@@ -1,42 +1,178 @@
-## Paso 5: Capa de Aplicación – Servicios y Multiplexación
+# 🛰️ Misiones de Comunicación Galáctica – Base Rebelde
 
+## 🧩 Misión 1: Reconexión en la Base Eco (Hoth) – Direccionamiento IP y Subredes
 
-### Streaming Multimedia
+**Red asignada:** `172.16.0.0/24`
 
-En un entorno académico con transmisión de contenido multimedia, como videoconferencias o clases grabadas, es fundamental garantizar una experiencia fluida para todos los usuarios, incluso si cuentan con diferentes calidades de conexión. Para ello, una técnica adecuada es el *Adaptive HTTP Streaming, concretamente **DASH (Dynamic Adaptive Streaming over HTTP)*.
+### Requisitos de hosts por departamento:
 
-DASH divide el contenido multimedia en pequeños segmentos de distintos niveles de calidad. El cliente selecciona y descarga dinámicamente la versión más adecuada en función del *ancho de banda disponible en tiempo real*. Si la conexión es estable, se reproducen segmentos de mayor calidad; si hay congestión o caídas, se cambia automáticamente a una calidad inferior para evitar interrupciones.
+| Departamento         | Hosts requeridos | Potencia de 2 | Hosts útiles |
+|----------------------|------------------|----------------|---------------|
+| Comando central      | 50               | 2⁶ = 64        | 62            |
+| Defensa perimetral   | 30               | 2⁵ = 32        | 30            |
+| Centro médico        | 20               | 2⁵ = 32        | 30            |
+| Hangar y taller      | 14               | 2⁴ = 16        | 14            |
+| Enlace Troncal Antena| 6                | 2³ = 8         | 6             |
 
-Este enfoque optimiza el rendimiento de la red, mejora la experiencia del usuario y se adapta bien a entornos heterogéneos como el planteado en este proyecto, donde coexisten conexiones cableadas y WiFi con distintos niveles de velocidad y estabilidad.
+### Asignación de subredes:
+
+| Departamento         | Subred              | Máscara CIDR         | Hosts útiles | Rango de Hosts                   |
+|----------------------|---------------------|-----------------------|--------------|----------------------------------|
+| Comando Central      | 172.16.0.0/26       | 255.255.255.192       | 62           | 172.16.0.1 – 172.16.0.62         |
+| Defensa Perimetral   | 172.16.0.64/27      | 255.255.255.224       | 30           | 172.16.0.65 – 172.16.0.94        |
+| Centro Médico        | 172.16.0.96/27      | 255.255.255.224       | 30           | 172.16.0.97 – 172.16.0.126       |
+| Hangar y Taller      | 172.16.0.128/28     | 255.255.255.240       | 14           | 172.16.0.129 – 172.16.0.142      |
+| Enlace Troncal Antena| 172.16.0.144/29     | 255.255.255.248       | 6            | 172.16.0.145 – 172.16.0.150      |
 
 ---
 
-### Diseño de Servicios
+## 🧙‍♂️ Misión 2: Sabiduría de Yoda – Algoritmos de Enrutamiento y Rutas
 
-En un diseño de red como el del presente proyecto, se contempla la *implementación de servicios FTP/SFTP* para permitir la transferencia segura de archivos grandes entre nodos, y *servicios HTTP/HTTPS* para ofrecer contenido multimedia como conferencias grabadas o materiales interactivos.
+### Comparación entre enrutamiento estático y dinámico:
 
-La *resolución de nombres DNS* cumple un papel clave, permitiendo que los usuarios accedan a recursos mediante nombres de dominio en lugar de direcciones IPv6, lo cual mejora la usabilidad del sistema. Esta resolución es gestionada por un servidor DNS, que responde a las consultas de los clientes indicando la dirección correspondiente al nombre solicitado.
+| Característica        | Enrutamiento Estático         | Enrutamiento Dinámico              |
+|------------------------|-------------------------------|-------------------------------------|
+| Configuración         | Manual                        | Automática (protocolos)             |
+| Adaptabilidad         | Fija                          | Se adapta a cambios                 |
+| Uso de recursos       | Bajo                          | Alto (más CPU, RAM, ancho de banda)|
+| Escalabilidad         | Limitada                      | Alta (ideal para redes grandes)     |
+| Seguridad/control     | Muy alto                      | Requiere protección adicional       |
+| Ejemplo de uso        | Redes pequeñas                | Redes medianas/grandes              |
 
-Para soportar *múltiples solicitudes simultáneas, se aplican técnicas de **multiplexación*, que permiten que un único servidor atienda varios clientes al mismo tiempo. Esto se logra utilizando diferentes puertos o identificadores de sesión, garantizando una comunicación eficiente y sin interferencias entre usuarios.
+### Ejemplo de protocolo dinámico: RIP (Routing Information Protocol)
 
-# Estimación de Costes del Proyecto de Red (Actualizada)
+- Protocolo de vector de distancia.
+- Anuncia rutas periódicamente a vecinos.
+- Métrica: número de saltos (máx. 15).
+- Fácil de configurar, pero lento y propenso a bucles.
 
-| Elemento                             |   Cantidad |   Precio Unitario (€) |   Subtotal (€) |
-|:-------------------------------------|-----------:|----------------------:|---------------:|
-| Routers Cisco 2911                   |          5 |                 850   |           4250 |
-| Switches Cisco Catalyst 2960 (PT)    |          5 |                 400   |           2000 |
-| Switch Central PT (Core)             |          1 |                 400   |            400 |
-| Access Points                        |          3 |                 250   |            750 |
-| PCs / Laptops / Dispositivos Cliente |         10 |                 500   |           5000 |
-| Servidores (DNS, Web, FTP)           |          3 |                 900   |           2700 |
-| ASA 5506-X (Firewall)                |          1 |                 800   |            800 |
-| Cables de fibra multimodo (LC-LC)    |        200 |                   0.8 |            160 |
-| Cables de cobre Cat6                 |       2500 |                   0.4 |           1000 |
-| Rack y montaje                       |          1 |                1000   |           1000 |
-| Home Gateway IoT                     |          5 |                 150   |            750 |
-| Detectores de Humo IoT               |          5 |                  50   |            250 |
-| Cámaras de Videovigilancia IoT       |          3 |                 180   |            540 |
-| Altavoces Inteligentes IoT           |          4 |                 120   |            480 |
-| Servidor de Correo Electrónico       |          1 |                 900   |            900 |
+### Diferencia: Vector de distancia vs Estado de enlace
 
-*Coste total estimado: 23000.00 €*
+| Tipo de Protocolo      | Vector de Distancia (RIP)        | Estado de Enlace (OSPF)              |
+|------------------------|----------------------------------|--------------------------------------|
+| Funcionamiento         | Envía tabla completa a vecinos   | Envía estado de enlaces a todos      |
+| Convergencia           | Lenta                            | Rápida                               |
+| Visión de red          | Parcial                          | Global                               |
+| Escalabilidad          | Limitada                         | Alta                                 |
+| Complejidad            | Baja                             | Alta                                 |
+
+---
+
+## 🌐 Misión 3: Los Nombres del Holonet – DNS y Resolución de Nombres
+
+### ¿Qué es DNS?
+
+El **DNS (Domain Name System)** es como la guía telefónica galáctica: traduce nombres de dominio como `holonet.rebelion.org` en direcciones IP como `192.0.2.15`.
+
+### Proceso de resolución:
+
+1. **Caché local**: Si ya fue resuelto antes, se reutiliza.
+2. **Servidor DNS configurado**: Revisa su caché.
+3. **Resolución en cascada**:
+   - Servidor raíz `.`
+   - Servidor TLD `.org`
+   - Servidor autoritativo `rebelion.org`
+4. **Respuesta al cliente** con la IP correspondiente.
+
+### Registro DNS común: **Registro A**
+
+- Asocia nombre de dominio con dirección IPv4.
+
+### ¿Qué pasa si el servidor DNS falla?
+
+- No se puede navegar ni acceder por nombre.
+- Aunque la red física funcione, parecerá “caída”.
+
+---
+
+## ⚠️ Misión 4: “¡Es una trampa… de protocolos!” – TCP vs UDP
+
+### Comparación TCP vs UDP:
+
+| Característica      | TCP                                | UDP                                 |
+|---------------------|-------------------------------------|--------------------------------------|
+| Orientación         | Conexión orientada                 | No orientada a conexión              |
+| Fiabilidad          | Alta (entrega completa y ordenada) | Baja (no garantiza entrega)          |
+| Control de flujo    | Sí                                 | No                                   |
+| Retransmisión       | Sí (retransmite paquetes perdidos) | No (paquetes perdidos se descartan)  |
+| Rendimiento         | Más lento                          | Más rápido                           |
+| Encabezado          | 20-60 bytes                        | 8 bytes                              |
+| Ejemplos de uso     | Transferencias, web, banca         | Video en tiempo real, juegos, VoIP   |
+
+### ¿Por qué TCP es confiable?
+
+- Establece conexión antes de enviar datos.
+- Garantiza orden y entrega mediante confirmaciones.
+- Retransmite si hay errores.
+- Ideal para datos críticos como **planos de la Estrella de la Muerte**.
+
+### ¿Por qué UDP es rápido?
+
+- Envía sin establecer conexión.
+- No espera confirmación.
+- Útil en situaciones donde **la velocidad es prioridad** como en:
+  - Transmisiones desde X-Wings
+  - Coordenadas de combate en tiempo real
+
+---
+
+## 🔐 Misión 5: Comunicación Segura o Lado Oscuro – Criptografía y Seguridad de la Red
+
+### ¿Qué es la criptografía?
+
+Arte de cifrar mensajes para que **solo el receptor autorizado** pueda leerlos, incluso si son interceptados.
+
+---
+
+### 🔒 Cifrado Simétrico (una sola clave compartida)
+
+- **Funcionamiento:**  
+  Leia y Luke comparten una clave como `"ElSolDeEndor42"`  
+  Leia cifra → Luke descifra con la misma clave.
+
+- **Ventajas:**
+  - Muy rápido
+  - Ideal para grandes volúmenes de datos
+
+- **Ejemplo rebelde:**  
+  Comunicación segura entre Leia y Luke.
+
+---
+
+### 🛡️ Cifrado Asimétrico (clave pública/privada)
+
+- **Funcionamiento:**
+  - Cada nodo tiene una clave pública y una privada.
+  - Mon Mothma cifra con la **clave pública** del destinatario.
+  - Solo el receptor con su **clave privada** puede descifrar.
+
+- **Ventajas:**
+  - No requiere compartir claves antes.
+  - Escalable y seguro para nuevos aliados.
+
+- **Ejemplo rebelde:**  
+  Primer contacto con un planeta nuevo, sin clave previa.
+
+---
+
+### ✉️ Firmas Digitales: Autenticación y No Repudio
+
+- Garantizan que el mensaje:
+  - Proviene del remitente legítimo.
+  - No ha sido alterado.
+  - No puede ser repudiado después.
+
+---
+
+### 🔐 ¿Por qué usar SSH y no Telnet?
+
+| Protocolo | Seguridad        | Uso recomendado                      |
+|-----------|------------------|--------------------------------------|
+| Telnet    | Sin cifrado      | ❌ Nunca usar en producción           |
+| SSH       | Cifrado completo | ✅ Administración remota segura       |
+
+> **SSH** es esencial en la red rebelde para que los comandos no caigan en manos del Imperio.
+
+---
+
+¡Que la red te acompañe! 🚀
