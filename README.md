@@ -155,24 +155,6 @@ Arte de cifrar mensajes para que **solo el receptor autorizado** pueda leerlos, 
 
 ---
 
-### ✉️ Firmas Digitales: Autenticación y No Repudio
 
-- Garantizan que el mensaje:
-  - Proviene del remitente legítimo.
-  - No ha sido alterado.
-  - No puede ser repudiado después.
-
----
-
-### 🔐 ¿Por qué usar SSH y no Telnet?
-
-| Protocolo | Seguridad        | Uso recomendado                      |
-|-----------|------------------|--------------------------------------|
-| Telnet    | Sin cifrado      | ❌ Nunca usar en producción           |
-| SSH       | Cifrado completo | ✅ Administración remota segura       |
-
-> **SSH** es esencial en la red rebelde para que los comandos no caigan en manos del Imperio.
-
----
 
 ¡Que la red te acompañe! 🚀
